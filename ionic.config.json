@@ -1,0 +1,7 @@
+{
+  "name": "Api_exa",
+  "integrations": {
+    "capacitor": {}
+  },
+  "type": "vue"
+}

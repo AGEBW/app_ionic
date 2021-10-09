@@ -1,0 +1,6 @@
+{
+	"appId": "io.ionic.starter",
+	"appName": "Api_exa",
+	"webDir": "dist",
+	"bundledWebRuntime": false
+}
