@@ -2,24 +2,24 @@
   <ion-page>
     <ion-header :translucent="true">
       <ion-toolbar>
-        <ion-title>Shop</ion-title>
+        <ion-title>Details</ion-title>
       </ion-toolbar>
     </ion-header>
-    
+
     <ion-content :fullscreen="true">
       <ion-header collapse="condense">
         <ion-toolbar>
           <ion-title size="large">Blank</ion-title>
         </ion-toolbar>
       </ion-header>
-    
+
       <div id="container">
-        <ion-card v-for="item in items" :key="item">
+        <ion-card>
           <ion-card-header>
             <ion-card-subtitle>
               <div align="center">
 
-                  <img class="product-img" src="https://external-content.duckduckgo.com/iu/?u=http%3A%2F%2Fsantiagocaruso.com.ar%2Fwp-content%2Fuploads%2F2017%2F11%2F20900845_10156379092008475_4739202457655480608_o.jpg&f=1&nofb=1">
+                <img class="product-img" src="https://external-content.duckduckgo.com/iu/?u=http%3A%2F%2Fsantiagocaruso.com.ar%2Fwp-content%2Fuploads%2F2017%2F11%2F20900845_10156379092008475_4739202457655480608_o.jpg&f=1&nofb=1">
 
               </div>
             </ion-card-subtitle>
@@ -27,21 +27,25 @@
 
           </ion-card-header>
           <div align="start" class="labels">
-            <ion-label>Materia Oscura</ion-label>
+            <ion-label>Nombre: Materia Oscura</ion-label>
 
           </div>
           <div align="end" class="labels">
 
             <ion-label style="padding-left: 40px">
-              $250.50
+              Precio: $250.50
             </ion-label>
           </div>
           <br>
+          <div align="start" class="labels">
+            <ion-label>Marca: </ion-label>
+
+          </div>
           <p>
-            La nueva recopilacion de obras del prestigiado pintor Santiago Caruso
+          Detalles: La nueva recopilacion de obras del prestigiado pintor Santiago Caruso
           </p>
           <br>
-          <ion-button color="tertiary" @click="open(item)">Ver</ion-button>
+          <ion-button color="tertiary">Comprar</ion-button>
           <br>
         </ion-card>
       </div>
@@ -51,27 +55,16 @@
 
 <script lang="ts">
 import { IonContent, IonHeader, IonPage, IonTitle, IonToolbar } from '@ionic/vue';
-import {defineComponent, ref} from 'vue';
+import { defineComponent } from 'vue';
 
 export default defineComponent({
-  name: 'Home',
+  name: 'Details',
   components: {
     IonContent,
     IonHeader,
     IonPage,
     IonTitle,
     IonToolbar
-  },
-  setup(){
-    const items = ref([1,2,3,4,5,6,7,8,9,10])
-
-    return {
-      items,
-
-      open:function (value: any){
-        alert(value)
-      }
-    }
   }
 });
 </script>
@@ -79,7 +72,7 @@ export default defineComponent({
 <style scoped>
 #container {
   text-align: center;
-  
+
   position: absolute;
   left: 0;
   right: 0;
@@ -95,9 +88,9 @@ export default defineComponent({
 #container p {
   font-size: 16px;
   line-height: 22px;
-  
+
   color: #8c8c8c;
-  
+
   margin: 0;
 }
 
