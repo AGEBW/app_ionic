@@ -2,14 +2,14 @@
   <ion-page>
     <ion-header :translucent="true">
       <ion-toolbar>
-        <ion-title>Shop</ion-title>
+        <ion-title>Products</ion-title>
       </ion-toolbar>
     </ion-header>
 
     <ion-content :fullscreen="true">
       <ion-header collapse="condense">
         <ion-toolbar>
-          <ion-title size="large">Blank</ion-title>
+          <ion-title size="large">Product List</ion-title>
         </ion-toolbar>
       </ion-header>
 
@@ -33,6 +33,7 @@
 
 
         </ion-list>
+        <ion-button shape="round" fill="outline" size="small" @click="Añadir">Add</ion-button>
       </div>
     </ion-content>
   </ion-page>
@@ -72,6 +73,9 @@ export default defineComponent({
         // console.log(data);
         vue.coleccion=data;
       });
+    },
+    Añadir:function(){
+      this.$router.push('/productadd');
     },
     Editar:function(id: any){
       localStorage.setItem('ProductId',id);

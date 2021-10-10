@@ -7,7 +7,7 @@ import Details from '../views/Details.vue';
 import ProductAdd from '../views/Admin/Product_Add.vue';
 import ProductEdit from '../views/Admin/Product_Edit.vue';
 import ProductList from '../views/Admin/Product_List.vue';
-
+import ShopCar from "@/views/ShopCar.vue";
 const routes: Array<RouteRecordRaw> = [
   {
     path: '/',
@@ -43,6 +43,11 @@ const routes: Array<RouteRecordRaw> = [
     path: '/productlist',
     name: 'ProductList',
     component: ProductList
+  },
+  {
+    path: '/shopcar',
+    name: 'ShopCar',
+    component: ShopCar
   }
 ]
 

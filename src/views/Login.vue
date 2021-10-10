@@ -31,7 +31,7 @@
             <br>
             <br>
             <ion-button expand="block"  @click="Consultar">Iniciar Sesion</ion-button>
-            <ion-button expand="block" color="light" ><ion-route url="/register" component="Register"></ion-route>Registrar</ion-button>
+            <ion-button expand="block" color="light"  @click="Registrar">Registrar</ion-button>
           </ion-card-content>
         </ion-card>
       </div>
@@ -69,11 +69,22 @@ export default defineComponent({
       axios.post("http://localhost/api/login",{
         Password:this.Password,
         UserName:this.UserName
-      }).then(response=>{
-        console.log(response);
-        this.$router.push('/home');
+      }).then((response)=>{
+        const  data: any = response.data;
+
+        if(data["code"]==200){
+          if(data["user"]=='cliente'){
+            this.$router.push('/home');
+          }else {
+            this.$router.push('/productList');
+
+          }
+        }
       });
 
+    },
+    Registrar:function(){
+      this.$router.push("/register");
     }
   }
 });

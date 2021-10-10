@@ -2,7 +2,7 @@
   <ion-page>
     <ion-header :translucent="true">
       <ion-toolbar>
-        <ion-title>Shop</ion-title>
+        <ion-title>ShopCar</ion-title>
       </ion-toolbar>
     </ion-header>
 
@@ -17,18 +17,16 @@
         <ion-list>
           <ion-item-sliding>
 
-            <ion-item v-for="item in coleccion" :key="item.id">
+            <ion-item v-for="item in coleccion" :key="item.id" v-show="item.cant!=0">
               <ion-avatar>
                 <img src="https://external-content.duckduckgo.com/iu/?u=http%3A%2F%2Fsantiagocaruso.com.ar%2Fwp-content%2Fuploads%2F2017%2F11%2F20900845_10156379092008475_4739202457655480608_o.jpg&f=1&nofb=1">
               </ion-avatar>
               <ion-label >{{item.ProductName}}</ion-label>
               <ion-label >{{item.Price}}</ion-label>
-              <ion-button shape="round" fill="outline" size="small" @click="Editar(item.id)">v
-              </ion-button>
-              <ion-button shape="round" fill="outline" size="small" @click="Eliminar(item.id)">x
-              </ion-button>
+              <ion-label >{{(item.cant == undefined || item.cant == null)?'1':item.cant}}</ion-label>
+              <ion-button shape="round" fill="outline" size="small" @click="Eliminar(item.id)">x</ion-button>
             </ion-item>
-
+            <ion-button color="tertiary" >Comprar</ion-button>
           </ion-item-sliding>
 
 
@@ -46,7 +44,7 @@ import {defineComponent} from 'vue';
 import axios from 'axios';
 
 export default defineComponent({
-  name: 'ProductList',
+  name: 'ShopCar',
   components: {
     IonItem,
     IonContent,
@@ -63,22 +61,23 @@ export default defineComponent({
   }),
   methods:{
     Obtener:function(){
-      const vue = this.$data;
+      const a=localStorage.getItem('carrito');
+      if(a!=null){
+        this.coleccion=JSON.parse(a);
 
-      axios.get("http://localhost/api/product",{
+      }else{
+        console.log('vacio');
+      }
 
-      }).then(response=>{
-        const {data} = response.data;
-        // console.log(data);
-        vue.coleccion=data;
-      });
     },
     Editar:function(id: any){
       localStorage.setItem('ProductId',id);
       this.$router.push('/productedit');
     },
     Eliminar:async function(id: any){
-      const id_= id;
+
+      const vue = this.$data;
+
       const alert = await alertController
           .create({
             cssClass: 'my-custom-class',
@@ -95,11 +94,18 @@ export default defineComponent({
               },
               {
                 text: 'Delete',
-                handler: (id_) => {
-                  axios.post("http://localhost/api/product/delete/"+id).then(response=>{
-                    console.log(response);
-                    this.Obtener();
+                handler: () => {
+                  vue.coleccion.forEach((item: any)=>{
+                    if(item.id == id){
+                      if(item.cant == undefined || item.cant == null){
+                        item.cant=0;
+                      }else{
+                        item.cant=item.cant-1;
+                      }
+                    }
                   });
+
+                  localStorage.setItem('carrito',JSON.stringify(vue.coleccion))
                 },
               },
             ],
