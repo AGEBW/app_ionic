@@ -22,23 +22,23 @@
           <ion-card-content>
             <ion-item>
               <ion-label position="floating">Name</ion-label>
-              <ion-input></ion-input>
+              <ion-input :value="Name" @change="change('Name',$event.target.value)"></ion-input>
             </ion-item>
             <ion-item>
-              <ion-label position="floating"  >Email</ion-label>
-              <ion-input type="password"></ion-input>
+              <ion-label position="floating">Email</ion-label>
+              <ion-input :value="Email" @change="change('Email',$event.target.value)"></ion-input>
             </ion-item>
             <ion-item>
               <ion-label position="floating">Password</ion-label>
-              <ion-input></ion-input>
+              <ion-input type="password" :value="Password" @change="change('Password',$event.target.value)"></ion-input>
             </ion-item>
             <ion-item>
               <ion-label position="floating">UserName</ion-label>
-              <ion-input></ion-input>
+              <ion-input :value="UserName" @change="change('UserName',$event.target.value)"></ion-input>
             </ion-item>
 
             <br>
-            <ion-button expand="block" color="light" >Registrar</ion-button>
+            <ion-button expand="block" color="light" @click="Registrar" >Registrar</ion-button>
           </ion-card-content>
         </ion-card>
       </div>
@@ -48,14 +48,46 @@
 
 <script lang="ts">
 import { IonContent, IonPage } from '@ionic/vue';
-import { defineComponent } from 'vue';
+import {defineComponent, ref} from 'vue';
+import axios from 'axios';
 
 export default defineComponent({
   name: 'Register',
   components: {
     IonContent,
-
     IonPage,
+  },
+  data:()=>({
+    Name:"",
+    Email:"",
+    Password:"",
+    UserName:"",
+  }),
+  methods:{
+    change:function(name: any,val: any){
+      switch (name) {
+      case "Name": this.Name = val;
+        break;
+      case "Email": this.Email = val;
+        break;
+      case "Password": this.Password = val;
+        break;
+      case "UserName": this.UserName = val;
+        break;
+      }
+    },
+    Registrar:function(){
+      // console.log();
+      axios.post("http://localhost/api/register/user",{
+        Name:this.Name,
+        Email:this.Email,
+        Password:this.Password,
+        UserName:this.UserName
+      }).then(response=>{
+        console.log(response);
+        this.$router.push('/');
+      });
+    }
   }
 });
 </script>

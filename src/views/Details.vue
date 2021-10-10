@@ -27,26 +27,42 @@
 
           </ion-card-header>
           <div align="start" class="labels">
-            <ion-label>Nombre: Materia Oscura</ion-label>
+            <ion-label>Nombre: {{ProductName}}</ion-label>
 
           </div>
           <div align="end" class="labels">
 
             <ion-label style="padding-left: 40px">
-              Precio: $250.50
+              Precio: {{Price}}
             </ion-label>
           </div>
           <br>
           <div align="start" class="labels">
-            <ion-label>Marca: </ion-label>
-
+            <ion-label>Marca:{{Model}} </ion-label>
+            <br>
           </div>
-          <p>
-          Detalles: La nueva recopilacion de obras del prestigiado pintor Santiago Caruso
-          </p>
-          <br>
-          <ion-button color="tertiary">Comprar</ion-button>
-          <br>
+          <div align="start"  class="labels">
+            <div >
+              <ion-label>
+                Detalles: {{Detail}}
+              </ion-label>
+              <br>
+            </div >
+            <div >
+              <ion-label>Color: {{Color}}</ion-label>
+              <br>
+            </div>
+            <div >
+              <ion-label>Tipo: {{Type}}</ion-label>
+            </div>
+            <br>
+            <div >
+              <ion-label>Disponibilidad: {{Stock}}</ion-label>
+            </div>
+            <br>
+          </div>
+          <ion-button color="tertiary" @click="AddCar">Agregar al Carrito</ion-button>
+
         </ion-card>
       </div>
     </ion-content>
@@ -56,6 +72,7 @@
 <script lang="ts">
 import { IonContent, IonHeader, IonPage, IonTitle, IonToolbar } from '@ionic/vue';
 import { defineComponent } from 'vue';
+import axios from "axios";
 
 export default defineComponent({
   name: 'Details',
@@ -65,6 +82,71 @@ export default defineComponent({
     IonPage,
     IonTitle,
     IonToolbar
+  },
+  data:()=>({
+    objetoItem:{},
+    ProductName:"",
+    Detail:"",
+    Code:"",
+    Price:"",
+    Type:"",
+    Model:"",
+    Color:"",
+    Stock:"",
+    Id:""
+  }),
+  created(){
+    this.Obtener();
+  },
+  methods:{
+    Obtener:function(){
+      const vue = this.$data;
+      axios.get("http://localhost/api/product/edit/"+localStorage.getItem('ProductId')).then(response=>{
+        const {data} = response.data;
+        vue.ProductName = data["ProductName"];
+        vue.Detail = data["Detail"];
+        vue.Code = data["Code"];
+        vue.Price = data["Price"];
+        vue.Type = data["Type"];
+        vue.Model = data["Model"];
+        vue.Color = data["Color"];
+        vue.Stock = data["Stock"];
+        vue.Id = data["id"];
+        vue.objetoItem=data;
+      });
+    },
+    Salir:function(){
+      this.$router.push("/home");
+    },
+    AddCar:function(){
+      const carrito = localStorage.getItem('carrito');
+      const dataF = JSON.stringify(this.objetoItem);
+      console.log(carrito)
+
+      if(carrito==null){
+        localStorage.setItem('carrito',`[${dataF}]`)
+      }else{
+        const ct = JSON.parse(carrito);
+        const prod = JSON.parse(dataF);
+        let add = true;
+        ct.forEach((item: any) =>{
+          if(item.id == prod.id){
+            if(item.cant == undefined || item.cant == null){
+              item.cant = 2;
+            }else{
+              item.cant = item.cant + 1;
+            }
+            add = false;
+          }
+        })
+
+        if(add){
+            ct.push(prod);
+        }
+        localStorage.setItem('carrito',JSON.stringify(ct))
+      }
+
+    }
   }
 });
 </script>

@@ -14,7 +14,7 @@
       </ion-header>
     
       <div id="container">
-        <ion-card v-for="item in items" :key="item">
+        <ion-card v-for="item in coleccion" :key="item.id">
           <ion-card-header>
             <ion-card-subtitle>
               <div align="center">
@@ -27,21 +27,21 @@
 
           </ion-card-header>
           <div align="start" class="labels">
-            <ion-label>Materia Oscura</ion-label>
+            <ion-label>Nombre: {{item.ProductName}}</ion-label>
 
           </div>
           <div align="end" class="labels">
 
-            <ion-label style="padding-left: 40px">
-              $250.50
+            <ion-label style="padding-left: 40px">Precio:
+              {{item.Price}}
             </ion-label>
           </div>
           <br>
           <p>
-            La nueva recopilacion de obras del prestigiado pintor Santiago Caruso
+           Descripcion: {{item.Detail}}
           </p>
           <br>
-          <ion-button color="tertiary" @click="open(item)">Ver</ion-button>
+          <ion-button color="tertiary" @click="Editar(item.id)">Ver</ion-button>
           <br>
         </ion-card>
       </div>
@@ -52,6 +52,7 @@
 <script lang="ts">
 import { IonContent, IonHeader, IonPage, IonTitle, IonToolbar } from '@ionic/vue';
 import {defineComponent, ref} from 'vue';
+import axios from "axios";
 
 export default defineComponent({
   name: 'Home',
@@ -62,16 +63,28 @@ export default defineComponent({
     IonTitle,
     IonToolbar
   },
-  setup(){
-    const items = ref([1,2,3,4,5,6,7,8,9,10])
+  data:()=>({
+  coleccion:[]
+  }),
+  methods:{
+    Obtener:function(){
+      const vue = this.$data;
 
-    return {
-      items,
+      axios.get("http://localhost/api/product",{
 
-      open:function (value: any){
-        alert(value)
-      }
+      }).then(response=>{
+        const {data} = response.data;
+        // console.log(data);
+        vue.coleccion=data;
+      });
+    },
+    Editar:function(id: any){
+      localStorage.setItem('ProductId',id);
+      this.$router.push('/details');
     }
+  },
+    created(){
+  this.Obtener();
   }
 });
 </script>

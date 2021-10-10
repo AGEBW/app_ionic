@@ -98,7 +98,7 @@ export default defineComponent({
                 handler: (id_) => {
                   axios.post("http://localhost/api/product/delete/"+id).then(response=>{
                     console.log(response);
-                   this.Obtener();
+                    this.Obtener();
                   });
                 },
               },

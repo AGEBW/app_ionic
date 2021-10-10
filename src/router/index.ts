@@ -6,6 +6,7 @@ import Register from '../views/Register.vue';
 import Details from '../views/Details.vue';
 import ProductAdd from '../views/Admin/Product_Add.vue';
 import ProductEdit from '../views/Admin/Product_Edit.vue';
+import ProductList from '../views/Admin/Product_List.vue';
 
 const routes: Array<RouteRecordRaw> = [
   {
@@ -37,6 +38,11 @@ const routes: Array<RouteRecordRaw> = [
     path: '/productedit',
     name: 'ProductEdit',
     component: ProductEdit
+  },
+  {
+    path: '/productlist',
+    name: 'ProductList',
+    component: ProductList
   }
 ]
 
