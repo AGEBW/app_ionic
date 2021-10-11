@@ -66,7 +66,7 @@ export default defineComponent({
     Obtener:function(){
       const vue = this.$data;
 
-      axios.get("http://localhost/api/product",{
+      axios.get("https://api24723.herokuapp.com/api/product",{
 
       }).then(response=>{
         const {data} = response.data;
@@ -100,7 +100,7 @@ export default defineComponent({
               {
                 text: 'Delete',
                 handler: (id_) => {
-                  axios.post("http://localhost/api/product/delete/"+id).then(response=>{
+                  axios.post("https://api24723.herokuapp.com/api/product/delete/"+id).then(response=>{
                     console.log(response);
                    this.Obtener();
                   });

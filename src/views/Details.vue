@@ -101,7 +101,7 @@ export default defineComponent({
   methods:{
     Obtener:function(){
       const vue = this.$data;
-      axios.get("http://localhost/api/product/edit/"+localStorage.getItem('ProductId')).then(response=>{
+      axios.get("https://api24723.herokuapp.com/api/product/edit/"+localStorage.getItem('ProductId')).then(response=>{
         const {data} = response.data;
         vue.ProductName = data["ProductName"];
         vue.Detail = data["Detail"];

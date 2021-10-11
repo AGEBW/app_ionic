@@ -70,7 +70,7 @@ export default defineComponent({
     Obtener:function(){
       const vue = this.$data;
 
-      axios.get("http://localhost/api/product",{
+      axios.get("https://api24723.herokuapp.com/api/product",{
 
       }).then(response=>{
         const {data} = response.data;

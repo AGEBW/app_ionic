@@ -66,7 +66,7 @@ export default defineComponent({
     },
     Consultar:function(){
       // console.log();
-      axios.post("http://localhost/api/login",{
+      axios.post("https://api24723.herokuapp.com/api/login",{
         Password:this.Password,
         UserName:this.UserName
       }).then((response)=>{

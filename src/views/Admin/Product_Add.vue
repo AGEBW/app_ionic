@@ -101,7 +101,7 @@ export default defineComponent({
     },
     Añadir:function(){
       // console.log();
-      axios.post("http://localhost/api/product/add",{
+      axios.post("https://api24723.herokuapp.com/api/product/add",{
         ProductName:this.ProductName,
         Detail:this.Detail,
         Code:this.Code,
@@ -112,7 +112,7 @@ export default defineComponent({
         Stock:this.Stock
       }).then(response=>{
         console.log(response);
-
+        this.$router.push('/productlist');
       });
     }
   }

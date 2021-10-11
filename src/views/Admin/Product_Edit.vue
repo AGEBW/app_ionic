@@ -98,7 +98,7 @@ export default defineComponent({
       const vue = this.$data;
 
 
-      axios.get("http://localhost/api/product/edit/"+localStorage.getItem('ProductId')).then(response=>{
+      axios.get("https://api24723.herokuapp.com/api/product/edit/"+localStorage.getItem('ProductId')).then(response=>{
         const {data} = response.data;
         vue.ProductName = data["ProductName"];
         vue.Detail = data["Detail"];
@@ -134,7 +134,7 @@ export default defineComponent({
     },
     Añadir:function(){
       const vue = this.$data;
-      axios.post("http://localhost/api/product/update/"+vue.Id,{
+      axios.post("https://api24723.herokuapp.com/api/product/update/"+vue.Id,{
         ProductName:vue.ProductName,
         Detail:vue.Detail,
         Code:vue.Code,

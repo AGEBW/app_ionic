@@ -78,7 +78,7 @@ export default defineComponent({
     },
     Registrar:function(){
       // console.log();
-      axios.post("http://localhost/api/register/user",{
+      axios.post("https://api24723.herokuapp.com/api/register/user",{
         Name:this.Name,
         Email:this.Email,
         Password:this.Password,
