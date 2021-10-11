@@ -9,11 +9,12 @@
     <ion-content :fullscreen="true">
       <ion-header collapse="condense">
         <ion-toolbar>
-          <ion-label size="large">Blank</ion-label>
+          <ion-title size="large">Blank</ion-title>
         </ion-toolbar>
       </ion-header>
     
       <div id="container">
+
 
         <ion-card v-for="item in coleccion" :key="item.id">
           <ion-card-header>
@@ -46,24 +47,13 @@
           <br>
         </ion-card>
       </div>
-      <ion-infinite-scroll
-          @ionInfinite="loadData($event)"
-          threshold="100px"
-          id="infinite-scroll"
-          :disabled="isDisabled"
-      >
-        <ion-infinite-scroll-content
-            loading-spinner="crescent"
-            loading-text="Loading ">
-        </ion-infinite-scroll-content>
-      </ion-infinite-scroll>
+
     </ion-content>
   </ion-page>
 </template>
 
 <script lang="ts">
-import { IonContent, IonHeader, IonPage, IonTitle, IonToolbar,IonInfiniteScroll,
-  IonInfiniteScrollContent,
+import { IonContent, IonHeader, IonPage, IonTitle, IonToolbar,
 } from '@ionic/vue';
 import {defineComponent, ref} from 'vue';
 import axios from "axios";
@@ -76,8 +66,8 @@ export default defineComponent({
     IonPage,
     IonTitle,
     IonToolbar,
-    IonInfiniteScroll,
-    IonInfiniteScrollContent,
+
+
   },
   data:()=>({
   coleccion:[]
@@ -103,33 +93,6 @@ export default defineComponent({
     created(){
   this.Obtener();
   },
-  setup() {
-    const isDisabled = ref(false);
-    const toggleInfiniteScroll = () => {
-      isDisabled.value = !isDisabled.value;
-    }
-    const items = ref([]);
-    const pushData = () => {
-      const max = items.value.length + 20;
-      const min = max - 20;
-      for (let i = min; i < max; i++) {
-        items.value.push(i);
-      }
-    }
-
-    const loadData = (ev: CustomEvent) => {
-      setTimeout(() => {
-        pushData();
-        console.log('Loaded data');
-        ev.target.complete();
-
-        // App logic to determine if all data is loaded
-        // and disable the infinite scroll
-        if (items.value.length == 1000) {
-          ev.target.disabled = true;
-        }
-      }, 500);
-    }
 });
 </script>
 
