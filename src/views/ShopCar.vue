@@ -26,7 +26,7 @@
               <ion-label >{{(item.cant == undefined || item.cant == null)?'1':item.cant}}</ion-label>
               <ion-button shape="round" fill="outline" size="small" @click="Eliminar(item.id)">x</ion-button>
             </ion-item>
-            <ion-button color="tertiary" >Comprar</ion-button>
+            <ion-button color="tertiary" @click="Adicion" >Comprar</ion-button>
           </ion-item-sliding>
 
 
@@ -60,6 +60,33 @@ export default defineComponent({
     coleccion:[]
   }),
   methods:{
+    Adicion:async function(id: any){
+      const id_= id;
+      const alert = await alertController
+          .create({
+            cssClass: 'my-custom-class',
+            header: 'Alert',
+            message: 'Finish shop?',
+            buttons: [
+              {
+                text: 'Cancel',
+                role: 'cancel',
+                cssClass: 'secondary',
+                handler: () => {
+                  console.log('Confirm Cancel')
+                },
+              },
+              {
+                text: 'yes',
+                handler: (id_) => {
+                  this.$router.push('/home');
+                },
+              },
+            ],
+          });
+
+      return alert.present();
+    },
     Obtener:function(){
       const a=localStorage.getItem('carrito');
       if(a!=null){
@@ -116,7 +143,8 @@ export default defineComponent({
   },
   created(){
     this.Obtener();
-  }
+  },
+
 });
 </script>
 

@@ -3,6 +3,7 @@
     <ion-header :translucent="true">
       <ion-toolbar>
         <ion-title>Shop</ion-title>
+        <ion-button shape="round" fill="outline" size="small"  @click="Carrito">ShopCar</ion-button>
       </ion-toolbar>
     </ion-header>
     
@@ -29,21 +30,21 @@
 
           </ion-card-header>
           <div align="start" class="labels">
-            <ion-label>Nombre: {{item.ProductName}}</ion-label>
+            <ion-label>Name: {{item.ProductName}}</ion-label>
 
           </div>
           <div align="end" class="labels">
 
-            <ion-label style="padding-left: 40px">Precio:
+            <ion-label style="padding-left: 40px">Price:
               {{item.Price}}
             </ion-label>
           </div>
           <br>
           <p>
-           Descripcion: {{item.Detail}}
+           Description: {{item.Detail}}
           </p>
           <br>
-          <ion-button color="tertiary" @click="Editar(item.id)">Ver</ion-button>
+          <ion-button color="tertiary" @click="Editar(item.id)">See more..</ion-button>
           <br>
         </ion-card>
       </div>
@@ -73,6 +74,10 @@ export default defineComponent({
   coleccion:[]
   }),
   methods:{
+
+      Carrito:function(){
+        this.$router.push('/shopcar');
+      },
     Obtener:function(){
       const vue = this.$data;
 
@@ -92,7 +97,7 @@ export default defineComponent({
   },
     created(){
   this.Obtener();
-  },
+  }
 });
 </script>
 
