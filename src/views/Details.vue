@@ -62,7 +62,7 @@
             <br>
           </div>
           <ion-button color="tertiary" @click="AddCar">Agregar al Carrito</ion-button>
-
+          <ion-button shape="round" fill="outline" size="small" @click="Salir">Return</ion-button>
         </ion-card>
       </div>
     </ion-content>
