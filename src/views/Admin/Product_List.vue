@@ -22,7 +22,7 @@
                 <img src="https://external-content.duckduckgo.com/iu/?u=http%3A%2F%2Fsantiagocaruso.com.ar%2Fwp-content%2Fuploads%2F2017%2F11%2F20900845_10156379092008475_4739202457655480608_o.jpg&f=1&nofb=1">
               </ion-avatar>
               <ion-label >{{item.ProductName}}</ion-label>
-              <ion-label >{{item.Price}}</ion-label>
+              <ion-label >${{item.Price}}</ion-label>
               <ion-button shape="round" fill="outline" size="small" @click="Editar(item.id)">v
               </ion-button>
               <ion-button shape="round" fill="outline" size="small" @click="Eliminar(item.id)">x

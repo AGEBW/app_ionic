@@ -10,7 +10,7 @@
           <ion-card-header>
             <ion-card-subtitle>
             </ion-card-subtitle>
-            <ion-card-title>Añadir Producto</ion-card-title>
+            <ion-card-title>Add Product</ion-card-title>
 
           </ion-card-header>
 
@@ -48,7 +48,7 @@
               <ion-input :value="Stock" @change="change('Stock',$event.target.value)"></ion-input>
             </ion-item>
             <br>
-            <ion-button expand="block" color="light"  @click="Añadir" >Añadir</ion-button>
+            <ion-button expand="block" color="light"  @click="Añadir" >Add</ion-button>
           </ion-card-content>
         </ion-card>
       </div>

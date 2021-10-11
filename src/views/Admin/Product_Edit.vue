@@ -12,8 +12,8 @@
             </ion-card-subtitle>
             <ion-card-title>
               <div class="ion-justify-content-between row">
-              <ion-label style="font-size: 20px" align="start">{{!disabled ? "Editar" : ""}} Producto</ion-label>
-               <ion-button @click="editable" shape="round" fill="outline" size="small" align="end">{{disabled ? "Editar" : "Cancelar"}}</ion-button>
+              <ion-label style="font-size: 20px" align="start">{{!disabled ? "Editar" : ""}} Product</ion-label>
+               <ion-button @click="editable" shape="round" fill="outline" size="small" align="end">{{disabled ? "Edit" : "Cancel"}}</ion-button>
               </div>
             </ion-card-title>
 
@@ -53,8 +53,8 @@
               <ion-input :value="Stock" @change="change('Stock',$event.target.value)" :disabled="disabled"></ion-input>
             </ion-item>
             <br>
-            <ion-button expand="block" color="light"  @click="Añadir" v-if="!disabled">Añadir</ion-button>
-            <ion-button expand="block" color="light"  @click="Salir" v-else>Aceptar</ion-button>
+            <ion-button expand="block" color="light"  @click="Añadir" v-if="!disabled">Add</ion-button>
+            <ion-button expand="block" color="light"  @click="Salir" v-else>Return</ion-button>
 
           </ion-card-content>
         </ion-card>
